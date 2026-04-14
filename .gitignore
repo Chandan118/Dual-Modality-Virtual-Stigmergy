@@ -1,0 +1,44 @@
+# ROS 2 build artifacts
+build/
+install/
+log/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.egg
+*.egg
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maps and bag files
+*.pgm
+*.yaml
+*.bag
+*.mcap
+
+# Data output (experiment CSVs)
+data/*.csv
+!data/README.md
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# JetPack / CUDA (if any)
+*.trt
+*.onnx
+
+# Temporary files
+/tmp/
+*.tmp
+.cache/
