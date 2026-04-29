@@ -15,6 +15,7 @@ Run:
 
 import csv
 import os
+import statistics
 import threading
 import time
 
@@ -28,6 +29,32 @@ try:
     CV2_AVAILABLE = True
 except ImportError:
     CV2_AVAILABLE = False
+
+
+def timestamped_filename(prefix):
+    """Generate a timestamped filename for experiment logs."""
+    ts = time.strftime("%Y%m%d_%H%M%S")
+    return "{}_{}".format(prefix, ts)
+
+
+class CsvLogger(object):
+    """Simple CSV logger for experiment data."""
+
+    def __init__(self, name, headers):
+        log_dir = os.path.join(os.path.expanduser("~"), "formica_logs")
+        os.makedirs(log_dir, exist_ok=True)
+        fname = timestamped_filename(name) + ".csv"
+        self._path = os.path.join(log_dir, fname)
+        self._file = open(self._path, "w", newline="")
+        self._writer = csv.writer(self._file)
+        self._writer.writerow(headers)
+
+    def write_row(self, row):
+        self._writer.writerow(row)
+        self._file.flush()
+
+    def close(self):
+        self._file.close()
 
 
 class CNNDetectionNode(object):
