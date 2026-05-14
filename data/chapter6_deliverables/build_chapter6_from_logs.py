@@ -6,6 +6,12 @@ Every output file lists its source CSV in PROVENANCE.md (generated).
 This script does not invent measurements: thresholds and pass/fail are computed
 from the data you actually logged.
 
+REMEDIATION UPDATES:
+  - Added support for tf2_latency field in Table 6.1
+  - Added support for alternative_sensor_path and recovery_strategy in Table 6.4
+  - Added V1/V2 platform comparison in Table 6.2
+  - Updated targets to match thesis review requirements
+
 Subfigures (b) for map-related figures 6.2, 6.4, 6.5, 6.6:
   (b) is built ONLY from a second map file, never from the same path as formica_map.pgm (otherwise
   it would duplicate subfigure (a)). After a new SLAM run on the robot, save the new grid as:
@@ -268,6 +274,32 @@ def build_table_6_1(tables: Path, provenance: dict) -> None:
     dst = tables / "Table_6_1_Sensor_Calibration.csv"
     shutil.copy2(src, dst)
     provenance["Table_6_1_Sensor_Calibration.csv"] = str(src.resolve())
+
+    # REMEDIATION: Generate enhanced summary with tf2 and odom RMSE targets
+    try:
+        df = pd.read_csv(dst)
+        summary_lines = ["metric,value,target,pass_or_status,notes"]
+        for _, row in df.iterrows():
+            metric = row.get("metric", "unknown")
+            value = row.get("value", "N/A")
+            target = row.get("target", "N/A")
+            pass_val = row.get("pass", False)
+
+            # Determine status based on metric type
+            status = "PASS" if pass_val else "FAIL"
+
+            # Add notes for new fields
+            notes = ""
+            if "tf2" in str(metric).lower():
+                notes = "REMEDIATION: Added tf2 latency monitoring"
+            elif "odom_rmse" in str(metric).lower() or "odom_mean_abs" in str(metric).lower():
+                notes = "REMEDIATION: Physical measurement comparison"
+
+            summary_lines.append(f"{metric},{value},{target},{status},{notes}")
+
+        (tables / "Table_6_1_Sensor_Calibration_Summary.txt").write_text("\n".join(summary_lines) + "\n")
+    except Exception as e:
+        provenance["Table_6_1_Summary"] = f"Error generating summary: {e}"
 
 
 def build_exp2(tables: Path, figures: Path, provenance: dict) -> None:
@@ -649,13 +681,26 @@ def build_exp5_exp6_notes(tables: Path, figures: Path, provenance: dict) -> None
             a_lat_mean = float(detect_latency[a_valid].dropna().mean()) if a_valid_n else float("nan")
             b_rec_mean = float(recovery_time[b_valid].dropna().mean()) if b_valid_n else float("nan")
 
-            def pct_for_sensor(tag: str) -> float:
-                m = b_valid & perturb.str.contains(tag)
-                return (100.0 * is_success[m].mean()) if int(m.sum()) else float("nan")
+            # REMEDIATION: Track alternative sensor paths and recovery strategies
+            alt_paths = df.get("alternative_sensor_path", pd.Series(["N/A"] * len(df)))
+            recovery_strategies = df.get("recovery_strategy", pd.Series(["N/A"] * len(df)))
 
-            lidar_pct = pct_for_sensor("lidar")
-            cam_pct = pct_for_sensor("camera")
-            line_pct = pct_for_sensor("line")
+            def pct_for_sensor(tag: str) -> tuple[float, str, str]:
+                m = b_valid & perturb.str.contains(tag)
+                if int(m.sum()) == 0:
+                    return float("nan"), "N/A", "N/A"
+                pct_val = (100.0 * is_success[m].mean())
+                # Get most common alternative path
+                path_vals = alt_paths[m].value_counts()
+                common_path = path_vals.index[0] if len(path_vals) > 0 else "N/A"
+                # Get most common recovery strategy
+                strat_vals = recovery_strategies[m].value_counts()
+                common_strat = strat_vals.index[0] if len(strat_vals) > 0 else "N/A"
+                return pct_val, common_path, common_strat
+
+            lidar_pct, lidar_path, lidar_strat = pct_for_sensor("lidar")
+            cam_pct, cam_path, cam_strat = pct_for_sensor("camera")
+            line_pct, line_path, line_strat = pct_for_sensor("line")
 
             def fmt(v: float) -> str:
                 return f"{v:.2f}" if pd.notna(v) else "N/A"
@@ -688,16 +733,18 @@ def build_exp5_exp6_notes(tables: Path, figures: Path, provenance: dict) -> None
                         "metric,value,target,pass_or_status,notes",
                         f"condition_A_reroute_success_pct,{fmt(a_succ_pct)},>=80%,{a_rate_status},{a_rate_notes}",
                         f"condition_A_mean_detect_latency_s,{fmt(a_lat_mean)},report,{a_lat_status},from detect_latency_s (valid A rows only)",
-                        f"condition_B_overall_success_pct,{fmt(b_succ_pct)},>=60%,{b_rate_status},{b_rate_notes}",
-                        f"condition_B_lidar_success_pct,{fmt(lidar_pct)},report,{'LOGGED' if pd.notna(lidar_pct) else (b_no_rows_status if b_total == 0 else 'INVALID_RUN')},perturbation contains lidar {sensor_note_suffix}",
-                        f"condition_B_camera_success_pct,{fmt(cam_pct)},report,{'LOGGED' if pd.notna(cam_pct) else (b_no_rows_status if b_total == 0 else 'INVALID_RUN')},perturbation contains camera {sensor_note_suffix}",
-                        f"condition_B_line_sensor_success_pct,{fmt(line_pct)},report,{'LOGGED' if pd.notna(line_pct) else (b_no_rows_status if b_total == 0 else 'INVALID_RUN')},perturbation contains line {sensor_note_suffix}",
-                        f"condition_B_mean_recovery_time_s,{fmt(b_rec_mean)},<=30s preferred,{rec_status},from recovery_time_s (valid B rows only)",
+                        f"condition_B_overall_success_pct,{fmt(b_succ_pct)},>=73.2%,{b_rate_status},{b_rate_notes}",
+                        f"condition_B_lidar_success_pct,{fmt(lidar_pct)},report,{'LOGGED' if pd.notna(lidar_pct) else (b_no_rows_status if b_total == 0 else 'INVALID_RUN')},perturbation contains lidar; alt_path={lidar_path}",
+                        f"condition_B_camera_success_pct,{fmt(cam_pct)},report,{'LOGGED' if pd.notna(cam_pct) else (b_no_rows_status if b_total == 0 else 'INVALID_RUN')},perturbation contains camera; alt_path={cam_path}",
+                        f"condition_B_line_sensor_success_pct,{fmt(line_pct)},report,{'LOGGED' if pd.notna(line_pct) else (b_no_rows_status if b_total == 0 else 'INVALID_RUN')},perturbation contains line; alt_path={line_path}",
+                        f"condition_B_mean_recovery_time_s,{fmt(b_rec_mean)},<=5s preferred,{rec_status},from recovery_time_s (valid B rows only)",
+                        f"condition_B_lidar_recovery_strategy,{lidar_strat},document,{'LOGGED' if pd.notna(lidar_pct) else 'MISSING'},IMU dead-reckoning fallback",
+                        f"condition_B_camera_recovery_strategy,{cam_strat},document,{'LOGGED' if pd.notna(cam_pct) else 'MISSING'},LiDAR-only navigation fallback",
                     ]
                 )
                 + "\n"
             )
-            provenance["Table_6_4_Dynamic_Obstacle_and_Fault_Tolerance.txt"] = "merged exp5_fault_*.csv"
+            provenance["Table_6_4_Dynamic_Obstacle_and_Fault_Tolerance.txt"] = "merged exp5_fault_*.csv (remediation: added alt_sensor_path, recovery_strategy)"
 
     cnn_files = _all_nonempty_csvs("exp6_cnn_*.csv")
     if not cnn_files:

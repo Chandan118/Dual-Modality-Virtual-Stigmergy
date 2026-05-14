@@ -4,6 +4,11 @@
 # Tuned for: robot max ~0.20 m/s; Nav2 linear cap below that for safety. Maze exp4 was timing out at 0.07 m/s
 # (420 s) with excessive path length — slightly higher cap + looser goal + longer BT/progress allowances.
 
+# REMEDIATION FIX: Reduced inflation_radius from 0.24m to 0.15m to allow navigation through maze corridors.
+# The original 0.24m inflation was too large, causing "Goal Unreachable" errors as the robot
+# thought it couldn't fit through the narrow maze passages.
+# Also reduced cost_scaling_factor for smoother cost transitions.
+
 amcl:
   ros__parameters:
     use_sim_time: false
@@ -233,10 +238,13 @@ local_costmap:
           raytrace_min_range: 0.0
           obstacle_max_range: 2.0
           obstacle_min_range: 0.20
+      # REMEDIATION: Reduced inflation_radius from 0.24m to 0.15m
+      # Original value was causing "Goal Unreachable" errors in maze corridors.
+      # FormicaBot footprint ~0.34m diameter; corridor width needs clearance.
       inflation_layer:
         plugin: nav2_costmap_2d::InflationLayer
-        cost_scaling_factor: 2.8
-        inflation_radius: 0.24
+        cost_scaling_factor: 1.8  # Reduced from 2.8 for smoother cost transitions
+        inflation_radius: 0.15    # Reduced from 0.24m to fit through maze corridors
       always_send_full_costmap: true
 
 global_costmap:
