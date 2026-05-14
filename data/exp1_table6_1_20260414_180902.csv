@@ -1,0 +1,7 @@
+metric,value,unit,target,pass
+LiDAR RMSE,1.2454853428007375,m,<= 0.02,False
+IMU drift,3189.2368253839604,deg/min,<= 0.5,False
+Odom mean error,4.110038978095831,%,<= 2.0,False
+Odom SD,0.42233212978858126,%,report only,True
+RGB-D reprojection,0.3,px,<= 0.5,True
+TCRT5000 SNR,19.200226984613458,dB,>= 6.0,True
