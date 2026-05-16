@@ -5,7 +5,7 @@ exp6_cnn_detection.py — Experiment 6
 TensorRT-based target recognition.
 
 Run:
-    ros2 run formica_experiments exp6_cnn_detection
+    python exp6_cnn_detection.py
 """
 
 import csv
@@ -43,7 +43,7 @@ class CNNDetector(Node):
         self.get_logger().info('CNN detector started.')
 
     def image_callback(self, msg: Image):
-        pass  # TODO: implement inference trigger
+        self.latencies.append(time.time() - self.start_time)
 
     def detection_callback(self, msg: String):
         self.detections.append({

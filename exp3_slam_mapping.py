@@ -5,7 +5,7 @@ exp3_slam_mapping.py — Experiment 3
 Online SLAM with landmark detection.
 
 Run:
-    ros2 run formica_experiments exp3_slam_mapping
+    python exp3_slam_mapping.py
 """
 
 import csv

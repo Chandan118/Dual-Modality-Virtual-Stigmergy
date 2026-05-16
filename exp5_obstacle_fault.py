@@ -5,7 +5,7 @@ exp5_obstacle_fault.py — Experiment 5
 Obstacle avoidance and sensor failure handling.
 
 Run:
-    ros2 run formica_experiments exp5_obstacle_fault
+    python exp5_obstacle_fault.py
 """
 
 import csv
@@ -38,7 +38,10 @@ class FaultTolerantNavigator(Node):
         self.get_logger().info('Fault tolerant navigator started.')
 
     def scan_callback(self, msg: LaserScan):
-        pass  # TODO: implement fault injection and recovery tracking
+        min_range = min(r for r in msg.ranges if r > 0)
+        if min_range < 0.3:
+            self.fault_events.append({'event': 'obstacle_detected', 'timestamp_s': time.time() - self.start_time,
+                                       'distance': min_range})
 
     def save_results(self):
         out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')

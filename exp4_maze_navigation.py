@@ -5,7 +5,7 @@ exp4_maze_navigation.py — Experiment 4
 Nav2 autonomous navigation in known map.
 
 Run:
-    ros2 run formica_experiments exp4_maze_navigation
+    python exp4_maze_navigation.py
 """
 
 import csv
@@ -42,7 +42,10 @@ class MazeNavigator(Node):
         self.get_logger().info('Maze navigator started.')
 
     def odom_callback(self, msg: Odometry):
-        pass  # TODO: implement maze trial logic
+        if self.trial_start is None and not self.goal_reached:
+            self.trial_start = time.time()
+            self.current_trial = {'trial': len(self.trial_results) + 1, 'start_x': msg.pose.pose.position.x,
+                                  'start_y': msg.pose.pose.position.y}
 
     def save_results(self):
         out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')

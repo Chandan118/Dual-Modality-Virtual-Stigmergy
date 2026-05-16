@@ -5,7 +5,7 @@ exp7_pheromone_trail.py — Experiment 7
 LED trail following with ethanol detection (MQ-3 sensor).
 
 Run:
-    ros2 run formica_experiments exp7_pheromone_trail
+    python exp7_pheromone_trail.py
 """
 
 import csv
@@ -55,7 +55,8 @@ class PheromoneFollower(Node):
         })
 
     def scan_callback(self, msg: LaserScan):
-        pass  # TODO: implement path deviation tracking
+        if self.samples and self.samples[-1]['sensor_type'] == 'line':
+            self.samples[-1]['path_clear'] = min(r for r in msg.ranges if r > 0) > 0.5
 
     def save_results(self):
         out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')

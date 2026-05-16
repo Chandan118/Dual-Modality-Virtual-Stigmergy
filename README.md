@@ -75,3 +75,14 @@ python exp7_pheromone_trail.py
 ## License
 
 MIT License
+
+## Contributors
+
+Thanks to all contributors who have helped improve this repository:
+
+<!-- readme: contributors start -->
+<!-- readme: contributors end -->
+
+## Acknowledgments
+
+This project was developed as part of thesis research on bio-inspired robotics.

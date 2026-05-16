@@ -5,7 +5,7 @@ exp2_power_profiling.py — Experiment 2
 INA219 Power Monitoring over mission duration.
 
 Run:
-    ros2 run formica_experiments exp2_power_profiling
+    python exp2_power_profiling.py
 """
 
 import csv

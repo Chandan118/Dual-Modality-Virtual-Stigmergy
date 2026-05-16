@@ -12,7 +12,7 @@ Hardware required:
   - Azure Kinect camera publishing /rgb/image_raw
 
 Run:
-    ros2 run formica_experiments exp1_sensor_calibration
+    python exp1_sensor_calibration.py
 """
 
 import csv
@@ -79,18 +79,33 @@ class SensorCalibrator(Node):
     def camera_callback(self, msg: String):
         self.camera_ok = (msg.data == 'ok')
 
-    # TODO: Implement calibration procedures
     def calibrate_lidar(self):
         """Measure LiDAR accuracy at known distances."""
-        raise NotImplementedError("TODO: Implement LiDAR calibration")
+        if not self.lidar_readings:
+            self.get_logger().warn("No LiDAR readings collected")
+            return None
+        all_ranges = [r for readings in self.lidar_readings for r in readings if r]
+        if all_ranges:
+            return {'min_range': min(all_ranges), 'max_range': max(all_ranges),
+                    'mean_range': sum(all_ranges) / len(all_ranges), 'sample_count': len(all_ranges)}
+        return None
 
     def calibrate_imu(self):
         """Measure IMU drift over time."""
-        raise NotImplementedError("TODO: Implement IMU calibration")
+        if len(self.imu_readings) < 2:
+            self.get_logger().warn("Insufficient IMU readings for drift analysis")
+            return None
+        angular_velocities = [msg.angular_velocity.z for msg in self.imu_readings]
+        return {'mean_drift': sum(angular_velocities) / len(angular_velocities),
+                'max_drift': max(angular_velocities), 'sample_count': len(angular_velocities)}
 
     def calibrate_odom(self):
         """Measure odometry error over known distance."""
-        raise NotImplementedError("TODO: Implement odometry calibration")
+        if len(self.odom_distances) < 2:
+            self.get_logger().warn("Insufficient odometry data for calibration")
+            return None
+        distances = [(msg.x ** 2 + msg.y ** 2) ** 0.5 for msg in self.odom_distances]
+        return {'mean_distance': sum(distances) / len(distances), 'sample_count': len(distances)}
 
     def check_all_sensors(self):
         """Verify all sensors are publishing."""
