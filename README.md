@@ -86,3 +86,4 @@ Thanks to all contributors who have helped improve this repository:
 ## Acknowledgments
 
 This project was developed as part of thesis research on bio-inspired robotics.
+
