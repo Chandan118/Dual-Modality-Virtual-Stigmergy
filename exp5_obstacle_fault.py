@@ -16,7 +16,6 @@ from datetime import datetime
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
-from nav_msgs.msg import Odometry
 
 
 def timestamped_filename(prefix, ext):
@@ -38,10 +37,17 @@ class FaultTolerantNavigator(Node):
         self.get_logger().info('Fault tolerant navigator started.')
 
     def scan_callback(self, msg: LaserScan):
-        min_range = min(r for r in msg.ranges if r > 0)
+        valid_ranges = [r for r in msg.ranges if r > 0.0 and r != float('inf')]
+        if not valid_ranges:
+            return
+
+        min_range = min(valid_ranges)
         if min_range < 0.3:
-            self.fault_events.append({'event': 'obstacle_detected', 'timestamp_s': time.time() - self.start_time,
-                                       'distance': min_range})
+            self.fault_events.append({
+                'event': 'obstacle_detected',
+                'timestamp_s': time.time() - self.start_time,
+                'distance': min_range,
+            })
 
     def save_results(self):
         out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')
@@ -53,7 +59,11 @@ class FaultTolerantNavigator(Node):
             writer.writeheader()
             for i, event in enumerate(self.fault_events):
                 recovery = self.recovery_times[i] if i < len(self.recovery_times) else ''
-                writer.writerow({'event': event, 'timestamp_s': recovery, 'recovery_time_s': ''})
+                writer.writerow({
+                    'event': event.get('event', ''),
+                    'timestamp_s': event.get('timestamp_s', ''),
+                    'recovery_time_s': recovery,
+                })
         self.get_logger().info(f"Results saved to {fname}")
 
 
