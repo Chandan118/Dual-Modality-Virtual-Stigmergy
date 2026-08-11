@@ -23,7 +23,7 @@ Chapter 6 experimental validation code for FormicaBot — a single-robot platfor
 
 ## Data
 
-Experiment output CSV files are stored in `data/`. Timestamps in filenames follow `exp{N}_{type}_{YYYYMMDD}_{HHMMSS}.csv`.
+Experiment output CSV files are stored in `data/` by default. You can override the output location with the `FORMICA_DATA_DIR` environment variable. Timestamps in filenames follow `exp{N}_{type}_{YYYYMMDD}_{HHMMSS}.csv`.
 
 | Prefix | Experiment |
 |--------|------------|
@@ -86,4 +86,3 @@ Thanks to all contributors who have helped improve this repository:
 ## Acknowledgments
 
 This project was developed as part of thesis research on bio-inspired robotics.
-

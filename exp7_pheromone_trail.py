@@ -24,6 +24,15 @@ def timestamped_filename(prefix, ext):
     return f"exp7_{prefix}_{ts}.{ext}"
 
 
+def get_output_dir():
+    return os.path.abspath(
+        os.environ.get(
+            "FORMICA_DATA_DIR",
+            os.path.join(os.path.dirname(__file__), "data"),
+        )
+    )
+
+
 class PheromoneFollower(Node):
     def __init__(self):
         super().__init__('exp7_pheromone_trail')
@@ -56,10 +65,11 @@ class PheromoneFollower(Node):
 
     def scan_callback(self, msg: LaserScan):
         if self.samples and self.samples[-1]['sensor_type'] == 'line':
-            self.samples[-1]['path_clear'] = min(r for r in msg.ranges if r > 0) > 0.5
+            valid_ranges = [r for r in msg.ranges if r > 0 and r != float('inf')]
+            self.samples[-1]['path_clear'] = bool(valid_ranges) and min(valid_ranges) > 0.5
 
     def save_results(self):
-        out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')
+        out_dir = get_output_dir()
         os.makedirs(out_dir, exist_ok=True)
 
         fname = os.path.join(out_dir, timestamped_filename('pheromone', 'csv'))

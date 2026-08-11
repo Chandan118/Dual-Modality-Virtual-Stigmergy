@@ -23,6 +23,15 @@ def timestamped_filename(prefix, ext):
     return f"exp2_{prefix}_{ts}.{ext}"
 
 
+def get_output_dir():
+    return os.path.abspath(
+        os.environ.get(
+            "FORMICA_DATA_DIR",
+            os.path.join(os.path.dirname(__file__), "data"),
+        )
+    )
+
+
 class PowerProfiler(Node):
     def __init__(self):
         super().__init__('exp2_power_profiling')
@@ -51,7 +60,7 @@ class PowerProfiler(Node):
             )
 
     def save_results(self):
-        out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')
+        out_dir = get_output_dir()
         os.makedirs(out_dir, exist_ok=True)
 
         fname = os.path.join(out_dir, timestamped_filename('power', 'csv'))

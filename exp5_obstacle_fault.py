@@ -23,6 +23,15 @@ def timestamped_filename(prefix, ext):
     return f"exp5_{prefix}_{ts}.{ext}"
 
 
+def get_output_dir():
+    return os.path.abspath(
+        os.environ.get(
+            "FORMICA_DATA_DIR",
+            os.path.join(os.path.dirname(__file__), "data"),
+        )
+    )
+
+
 class FaultTolerantNavigator(Node):
     def __init__(self):
         super().__init__('exp5_obstacle_fault')
@@ -50,18 +59,19 @@ class FaultTolerantNavigator(Node):
             })
 
     def save_results(self):
-        out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')
+        out_dir = get_output_dir()
         os.makedirs(out_dir, exist_ok=True)
 
         fname = os.path.join(out_dir, timestamped_filename('fault', 'csv'))
         with open(fname, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=['event', 'timestamp_s', 'recovery_time_s'])
+            writer = csv.DictWriter(f, fieldnames=['event', 'timestamp_s', 'distance', 'recovery_time_s'])
             writer.writeheader()
             for i, event in enumerate(self.fault_events):
                 recovery = self.recovery_times[i] if i < len(self.recovery_times) else ''
                 writer.writerow({
                     'event': event.get('event', ''),
                     'timestamp_s': event.get('timestamp_s', ''),
+                    'distance': event.get('distance', ''),
                     'recovery_time_s': recovery,
                 })
         self.get_logger().info(f"Results saved to {fname}")
