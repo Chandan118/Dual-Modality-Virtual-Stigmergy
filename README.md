@@ -76,9 +76,15 @@ python exp7_pheromone_trail.py
 
 MIT License
 
-## Contributors
+## Contributors and Co-Contributors
 
 Thanks to all contributors who have helped improve this repository:
+
+- [@hhtbbc](https://github.com/hhtbbc)
+- [@orange0131](https://github.com/orange0131)
+- [@vnewi](https://github.com/vnewi)
+- [@Txinyan](https://github.com/Txinyan)
+- [@LTT-BIT](https://github.com/LTT-BIT)
 
 <!-- readme: contributors start -->
 <!-- readme: contributors end -->
