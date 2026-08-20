@@ -22,7 +22,7 @@ def timestamped_filename(prefix, ext):
 
 class SensorCalibrator(Node):
     def __init__(self):
-        super().__init__('exp1_sensor_calibration')
+        super().__init__("exp1_sensor_calibration")
 
         self.lidar_readings = []
         self.imu_readings = []
@@ -32,20 +32,26 @@ class SensorCalibrator(Node):
         self.camera_ok = False
 
         self.lidar_sub = self.create_subscription(
-            LaserScan, '/scan', self.lidar_callback, 10)
-        self.imu_sub = self.create_subscription(
-            Imu, '/imu/data', self.imu_callback, 10)
+            LaserScan, "/scan", self.lidar_callback, 10
+        )
+        self.imu_sub = self.create_subscription(Imu, "/imu/data", self.imu_callback, 10)
         self.odom_sub = self.create_subscription(
-            Odometry, '/odom', self.odom_callback, 10)
+            Odometry, "/odom", self.odom_callback, 10
+        )
         self.line_sub = self.create_subscription(
-            Float32MultiArray, '/line_sensors', self.line_callback, 10)
+            Float32MultiArray, "/line_sensors", self.line_callback, 10
+        )
         self.gas_sub = self.create_subscription(
-            Float32, '/gas_sensor', self.gas_callback, 10)
+            Float32, "/gas_sensor", self.gas_callback, 10
+        )
         self.camera_sub = self.create_subscription(
-            String, '/camera/status', self.camera_callback, 10)
+            String, "/camera/status", self.camera_callback, 10
+        )
 
-        self.get_logger().info('Sensor calibration node started. '
-                                'Move robot through calibration routine.')
+        self.get_logger().info(
+            "Sensor calibration node started. "
+            "Move robot through calibration routine."
+        )
 
     def lidar_callback(self, msg: LaserScan):
         self.lidar_readings.append(msg.ranges)
@@ -63,7 +69,7 @@ class SensorCalibrator(Node):
         self.gas_sensor.append(msg.data)
 
     def camera_callback(self, msg: String):
-        self.camera_ok = (msg.data == 'ok')
+        self.camera_ok = msg.data == "ok"
 
     def calibrate_lidar(self):
         """Measure LiDAR accuracy at known distances."""
@@ -72,8 +78,12 @@ class SensorCalibrator(Node):
             return None
         all_ranges = [r for readings in self.lidar_readings for r in readings if r]
         if all_ranges:
-            return {'min_range': min(all_ranges), 'max_range': max(all_ranges),
-                    'mean_range': sum(all_ranges) / len(all_ranges), 'sample_count': len(all_ranges)}
+            return {
+                "min_range": min(all_ranges),
+                "max_range": max(all_ranges),
+                "mean_range": sum(all_ranges) / len(all_ranges),
+                "sample_count": len(all_ranges),
+            }
         return None
 
     def calibrate_imu(self):
@@ -82,16 +92,22 @@ class SensorCalibrator(Node):
             self.get_logger().warn("Insufficient IMU readings for drift analysis")
             return None
         angular_velocities = [msg.angular_velocity.z for msg in self.imu_readings]
-        return {'mean_drift': sum(angular_velocities) / len(angular_velocities),
-                'max_drift': max(angular_velocities), 'sample_count': len(angular_velocities)}
+        return {
+            "mean_drift": sum(angular_velocities) / len(angular_velocities),
+            "max_drift": max(angular_velocities),
+            "sample_count": len(angular_velocities),
+        }
 
     def calibrate_odom(self):
         """Measure odometry error over known distance."""
         if len(self.odom_distances) < 2:
             self.get_logger().warn("Insufficient odometry data for calibration")
             return None
-        distances = [(msg.x ** 2 + msg.y ** 2) ** 0.5 for msg in self.odom_distances]
-        return {'mean_distance': sum(distances) / len(distances), 'sample_count': len(distances)}
+        distances = [(msg.x**2 + msg.y**2) ** 0.5 for msg in self.odom_distances]
+        return {
+            "mean_distance": sum(distances) / len(distances),
+            "sample_count": len(distances),
+        }
 
     def check_all_sensors(self):
         """Verify all sensors are publishing."""
@@ -106,18 +122,18 @@ class SensorCalibrator(Node):
 
     def save_results(self):
         """Write calibration results to CSV."""
-        out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')
+        out_dir = os.path.join(os.path.expanduser("~"), "formica_experiments", "data")
         os.makedirs(out_dir, exist_ok=True)
 
-        fname = os.path.join(out_dir, timestamped_filename('calibration', 'csv'))
-        with open(fname, 'w', newline='') as f:
+        fname = os.path.join(out_dir, timestamped_filename("calibration", "csv"))
+        with open(fname, "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(['timestamp', 'sensor', 'value'])
+            writer.writerow(["timestamp", "sensor", "value"])
             ts = datetime.now().isoformat()
             for r in self.lidar_readings:
-                writer.writerow([ts, 'lidar', r])
+                writer.writerow([ts, "lidar", r])
             for r in self.imu_readings:
-                writer.writerow([ts, 'imu_angular_velocity_z', r.angular_velocity.z])
+                writer.writerow([ts, "imu_angular_velocity_z", r.angular_velocity.z])
         self.get_logger().info(f"Results saved to {fname}")
 
 
@@ -132,5 +148,5 @@ def main():
         rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

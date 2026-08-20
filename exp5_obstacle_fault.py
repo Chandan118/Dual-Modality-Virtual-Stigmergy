@@ -18,45 +18,54 @@ def timestamped_filename(prefix, ext):
 
 class FaultTolerantNavigator(Node):
     def __init__(self):
-        super().__init__('exp5_obstacle_fault')
+        super().__init__("exp5_obstacle_fault")
 
         self.fault_events = []
         self.recovery_times = []
         self.start_time = time.time()
 
         self.scan_sub = self.create_subscription(
-            LaserScan, '/scan', self.scan_callback, 10)
+            LaserScan, "/scan", self.scan_callback, 10
+        )
 
-        self.get_logger().info('Fault tolerant navigator started.')
+        self.get_logger().info("Fault tolerant navigator started.")
 
     def scan_callback(self, msg: LaserScan):
-        valid_ranges = [r for r in msg.ranges if r > 0.0 and r != float('inf')]
+        valid_ranges = [r for r in msg.ranges if r > 0.0 and r != float("inf")]
         if not valid_ranges:
             return
 
         min_range = min(valid_ranges)
         if min_range < 0.3:
-            self.fault_events.append({
-                'event': 'obstacle_detected',
-                'timestamp_s': time.time() - self.start_time,
-                'distance': min_range,
-            })
+            self.fault_events.append(
+                {
+                    "event": "obstacle_detected",
+                    "timestamp_s": time.time() - self.start_time,
+                    "distance": min_range,
+                }
+            )
 
     def save_results(self):
-        out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')
+        out_dir = os.path.join(os.path.expanduser("~"), "formica_experiments", "data")
         os.makedirs(out_dir, exist_ok=True)
 
-        fname = os.path.join(out_dir, timestamped_filename('fault', 'csv'))
-        with open(fname, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=['event', 'timestamp_s', 'recovery_time_s'])
+        fname = os.path.join(out_dir, timestamped_filename("fault", "csv"))
+        with open(fname, "w", newline="") as f:
+            writer = csv.DictWriter(
+                f, fieldnames=["event", "timestamp_s", "recovery_time_s"]
+            )
             writer.writeheader()
             for i, event in enumerate(self.fault_events):
-                recovery = self.recovery_times[i] if i < len(self.recovery_times) else ''
-                writer.writerow({
-                    'event': event.get('event', ''),
-                    'timestamp_s': event.get('timestamp_s', ''),
-                    'recovery_time_s': recovery,
-                })
+                recovery = (
+                    self.recovery_times[i] if i < len(self.recovery_times) else ""
+                )
+                writer.writerow(
+                    {
+                        "event": event.get("event", ""),
+                        "timestamp_s": event.get("timestamp_s", ""),
+                        "recovery_time_s": recovery,
+                    }
+                )
         self.get_logger().info(f"Results saved to {fname}")
 
 
@@ -71,5 +80,5 @@ def main():
         rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

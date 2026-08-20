@@ -1,5 +1,8 @@
 # Dual-Modality Virtual Stigmergy: FormicaBot Experimental Validation
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python Linting](https://github.com/Chandan118/Dual-Modality-Virtual-Stigmergy/actions/workflows/python-lint.yml/badge.svg)](https://github.com/Chandan118/Dual-Modality-Virtual-Stigmergy/actions/workflows/python-lint.yml)
+
 Chapter 6 experimental validation code for FormicaBot — a single-robot platform based on NVIDIA Jetson Orin Nano 8GB and ROS 2 Humble.
 
 ## Robot Platform
@@ -61,6 +64,12 @@ python exp6_cnn_detection.py
 python exp7_pheromone_trail.py
 ```
 
+## Simulations
+
+The `new_simulation/` directory contains comprehensive MATLAB and Simulink models for validating optical pheromone-based swarm robotics navigation. It includes models for realistic floor surfaces, sensor arrays, LED pheromone dispersion, and hardware validation scripts.
+
+See `new_simulation/README.md` for specific instructions on running the simulated benchmarks.
+
 ## Citation
 
 ```
@@ -68,7 +77,7 @@ python exp7_pheromone_trail.py
   title = {FormicaBot Chapter 6 Experimental Validation},
   author = {Chandan Sheikder},
   year = {2026},
-  url = {https://github.com/Chandan118/bio-inspired-thesis-chapter6}
+  url = {https://github.com/Chandan118/Dual-Modality-Virtual-Stigmergy}
 }
 ```
 

@@ -19,7 +19,7 @@ def timestamped_filename(prefix, ext):
 
 class CNNDetector(Node):
     def __init__(self):
-        super().__init__('exp6_cnn_detection')
+        super().__init__("exp6_cnn_detection")
 
         self.detections = []
         self.confidences = []
@@ -27,34 +27,41 @@ class CNNDetector(Node):
         self.start_time = time.time()
 
         self.image_sub = self.create_subscription(
-            Image, '/rgb/image_raw', self.image_callback, 10)
+            Image, "/rgb/image_raw", self.image_callback, 10
+        )
         self.detection_sub = self.create_subscription(
-            String, '/detections/class', self.detection_callback, 10)
+            String, "/detections/class", self.detection_callback, 10
+        )
         self.confidence_sub = self.create_subscription(
-            Float32, '/detections/confidence', self.confidence_callback, 10)
+            Float32, "/detections/confidence", self.confidence_callback, 10
+        )
 
-        self.get_logger().info('CNN detector started.')
+        self.get_logger().info("CNN detector started.")
 
     def image_callback(self, msg: Image):
         self.latencies.append(time.time() - self.start_time)
 
     def detection_callback(self, msg: String):
-        self.detections.append({
-            'timestamp_s': time.time() - self.start_time,
-            'class': msg.data,
-        })
+        self.detections.append(
+            {
+                "timestamp_s": time.time() - self.start_time,
+                "class": msg.data,
+            }
+        )
 
     def confidence_callback(self, msg: Float32):
         if self.detections:
-            self.detections[-1]['confidence'] = msg.data
+            self.detections[-1]["confidence"] = msg.data
 
     def save_results(self):
-        out_dir = os.path.join(os.path.expanduser('~'), 'formica_experiments', 'data')
+        out_dir = os.path.join(os.path.expanduser("~"), "formica_experiments", "data")
         os.makedirs(out_dir, exist_ok=True)
 
-        fname = os.path.join(out_dir, timestamped_filename('cnn', 'csv'))
-        with open(fname, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=['timestamp_s', 'class', 'confidence'])
+        fname = os.path.join(out_dir, timestamped_filename("cnn", "csv"))
+        with open(fname, "w", newline="") as f:
+            writer = csv.DictWriter(
+                f, fieldnames=["timestamp_s", "class", "confidence"]
+            )
             writer.writeheader()
             writer.writerows(self.detections)
         self.get_logger().info(f"Results saved to {fname}")
@@ -71,5 +78,5 @@ def main():
         rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
