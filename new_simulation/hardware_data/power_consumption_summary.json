@@ -1,0 +1,17 @@
+{
+  "experiment": "power_consumption",
+  "timestamp": "2026-08-15T05:36:48.575593",
+  "mean_power_W": 20.75069608985331,
+  "std_power_W": 3.1825909918381594,
+  "max_power_W": 26.647957433369683,
+  "min_power_W": 14.500328437290817,
+  "components": {
+    "jetson_W": 8.0,
+    "kinect_W": 4.0,
+    "rplidar_W": 3.5,
+    "sensors_W": 0.5,
+    "leds_W": 0.5,
+    "mq135_W": 0.18,
+    "motors_W": 4.07069608985331
+  }
+}

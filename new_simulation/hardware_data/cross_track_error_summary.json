@@ -1,0 +1,7 @@
+{
+  "experiment": "cross_track_error",
+  "mean_error_cm": 91.72194606768358,
+  "std_error_cm": 71.71748415484758,
+  "max_error_cm": 190.22117015993658,
+  "percentile_95_cm": 188.22929364610766
+}

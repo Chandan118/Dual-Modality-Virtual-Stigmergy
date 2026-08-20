@@ -1,0 +1,7 @@
+Metric,Ideal,Realistic,Difference,Ratio
+Trail Deviation (m),0.000000,0.003282,0.003282, N/A
+Trail Deviation Std (m),0.000000,0.001092,,
+Search Time (s),28.8000,27.5500,-1.2500,0.96
+Success Rate,1.0000,1.0000,0.0000,
+Path Efficiency,1.0004,0.8992,,
+Path Length (m),5.6549,6.2913,,

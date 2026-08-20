@@ -1,0 +1,278 @@
+<?xml version="1.0"?>
+<!--
+  FormicaBot Wheeled Robot URDF
+  Multi-robot swarm simulation
+  Author: Chandan Sheikder
+  Date: 2026-08-15
+-->
+<robot name="formicabot">
+  
+  <!-- Base Link -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.08" radius="0.08"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.0 0.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.08" radius="0.08"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  
+  <!-- Front Sensor Array (TCRT5000) -->
+  <link name="sensor_front">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.04 0.01"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.04 0.01"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="sensor_front_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="sensor_front"/>
+    <origin xyz="0.08 0 0.02" rpy="0 0 0"/>
+  </joint>
+  
+  <!-- Chemical Sensor (MQ-135) -->
+  <link name="sensor_chemical">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.01" radius="0.015"/>
+      </geometry>
+      <material name="brown">
+        <color rgba="0.6 0.3 0.1 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="sensor_chemical_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="sensor_chemical"/>
+    <origin xyz="0.05 0 0.06" rpy="0 0 0"/>
+  </joint>
+  
+  <!-- Pheromone LED Array (WS2812B) -->
+  <link name="led_ring">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.06"/>
+      </geometry>
+      <material name="led">
+        <color rgba="1.0 0.5 0.0 0.5"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="led_ring_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="led_ring"/>
+    <origin xyz="0 0 0.045" rpy="0 0 0"/>
+  </joint>
+  
+  <!-- LiDAR (RPLIDAR A1) -->
+  <link name="lidar">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.035"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.035"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+  </joint>
+  
+  <!-- Camera (Azure Kinect) -->
+  <link name="camera">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.09 0.025"/>
+      </geometry>
+      <material name="dark_gray">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera"/>
+    <origin xyz="0.03 0 0.12" rpy="0 0 0"/>
+  </joint>
+  
+  <!-- Left Wheel -->
+  <link name="wheel_left">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.03"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wheel_left_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_left"/>
+    <origin xyz="0 -0.08 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+  
+  <!-- Right Wheel -->
+  <link name="wheel_right">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.03"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wheel_right_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_right"/>
+    <origin xyz="0 0.08 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+  
+  <!-- Casters (front and back) -->
+  <link name="caster_front">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.015"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.015"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="caster_front_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_front"/>
+    <origin xyz="0.06 0 -0.06" rpy="0 0 0"/>
+  </joint>
+  
+  <link name="caster_back">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.015"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.015"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="caster_back_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_back"/>
+    <origin xyz="-0.06 0 -0.06" rpy="0 0 0"/>
+  </joint>
+  
+  <!-- Gazebo Plugin for Differential Drive -->
+  <gazebo reference="base_link">
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <update_rate>20</update_rate>
+      <left_joint>wheel_left_joint</left_joint>
+      <right_joint>wheel_right_joint</right_joint>
+      <wheel_separation>0.16</wheel_separation>
+      <wheel_diameter>0.06</wheel_diameter>
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1</max_wheel_acceleration>
+      <command_topic>cmd_vel</command_topic>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </gazebo>
+  
+  <!-- Gazebo Plugin for Laser Scanner (RPLIDAR) -->
+  <gazebo reference="lidar">
+    <plugin name="gazebo_ros_laser" filename="libgazebo_ros_ray_sensor.so">
+      <ros>
+        <namespace>/scan</namespace>
+        <remapping>~/out:=scan</remapping>
+      </ros>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.1</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+    </plugin>
+  </gazebo>
+  
+</robot>

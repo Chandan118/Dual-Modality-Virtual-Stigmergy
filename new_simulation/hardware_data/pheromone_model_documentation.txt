@@ -1,0 +1,16 @@
+VIRTUAL PHEROMONE DECAY MODEL DOCUMENTATION
+============================================
+
+IMPORTANT CORRECTION:
+The pheromone system uses VIRTUAL pheromones
+simulated in a software grid. Physical LED
+light does NOT evaporate.
+
+MATHEMATICAL DECAY EQUATION:
+  I(t) = I0 * exp(-φ * t) + I_residual
+
+PARAMETERS:
+  Decay constant (φ): 0.0200 per second
+  Residual fraction:  0.0100 (1%)
+  Time constant (τ):  50.0 seconds
+  Half-life:          34.7 seconds

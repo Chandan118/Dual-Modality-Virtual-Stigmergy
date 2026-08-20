@@ -1,0 +1,7 @@
+{
+  "experiment": "mq135_warmup",
+  "stabilization_time_s": 90.0,
+  "stabilization_time_min": 1.5,
+  "initial_voltage_V": 0.7380254154447703,
+  "final_voltage_V": 3.196480938416422
+}

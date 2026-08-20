@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ROS2 Multi-Robot Swarm Package
+  Author: Chandan Sheikder
+  Date: 2026-08-15
+-->
+<package format="3">
+  <name>multi_robot_swarm</name>
+  <version>1.0.0</version>
+  <description>Multi-robot swarm simulation with 20 wheeled robots</description>
+  
+  <maintainer email="chandan@example.com">Chandan Sheikder</maintainer>
+  <license>MIT</license>
+  
+  <buildtool_depend>ament_python</buildtool_depend>
+  
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>std_msgs</depend>
+  
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+  
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

@@ -1,0 +1,14 @@
+{
+  "executed_at": "2026-08-11T17:42:36.660805",
+  "workspace": "/Users/chandansheikder/Documents/Bio-Inspired Thesis/chapter 6 reseach paper/new Simulation",
+  "priority_6_results": {
+    "95th_percentile_cm": 2.968,
+    "max_deviation_cm": 4.953,
+    "caption_consistent": false
+  },
+  "power_analysis": {
+    "peripherals_only_W": 1.866,
+    "full_system_idle_W": 3.116,
+    "full_system_active_W": 6.866
+  }
+}

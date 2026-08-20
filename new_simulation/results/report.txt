@@ -1,0 +1,67 @@
+=============================================================
+Real-Space Optical Pheromone Exchange Simulation Report
+=============================================================
+
+Simulation Parameters:
+  Arena Size: 5.0 x 5.0 m
+  Simulation Time: 60.0 s
+  Time Step: 0.010 s
+  Robot Radius: 0.050 m
+  Max Speed: 0.20 m/s
+
+Floor Model Parameters:
+  Resolution: 0.0050 m
+  Imperfection Level: 0.30
+  Dust Density: 500 particles/m^2
+
+Sensor Parameters (TCRT5000):
+  Number of Sensors: 4
+  Sensor Spacing: 0.012 m
+  Noise Level: 0.0500
+  Crosstalk Factor: 0.1000
+
+Pheromone Parameters (WS2812B):
+  LED Intensity: 255
+  Spot Size: 0.020 m
+  Decay Rate: 0.0200 /s
+
+=============================================================
+Performance Comparison
+=============================================================
+
+Trail Deviation:
+  Ideal:      0.0000 m (std: 0.0000 m)
+  Realistic:  0.0033 m (std: 0.0011 m)
+  Increase:   1478060036469798.5%
+
+Search Time:
+  Ideal:      28.80 s
+  Realistic:  27.55 s
+  Increase:   -4.3%
+
+Success Rate:
+  Ideal:      100%
+  Realistic:  100%
+
+Path Efficiency:
+  Ideal:      100.0%
+  Realistic:  89.9%
+
+Path Length:
+  Ideal:      5.65 m
+  Realistic:  6.29 m
+
+Sensor Statistics (Realistic Mode):
+  Average Reading: 14.49
+  Std Deviation:   3.02
+
+=============================================================
+Key Findings
+=============================================================
+
+1. Realistic sensing has minimal impact on trail deviation (3.28 mm increase).
+2. Navigation performance remains similar with realistic sensors.
+3. Success rate is maintained at 100% with realistic sensors.
+
+Generated: 15-Aug-2026 05:40:23
+

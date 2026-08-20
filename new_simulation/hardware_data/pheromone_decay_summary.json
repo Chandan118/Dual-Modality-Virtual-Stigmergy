@@ -1,0 +1,9 @@
+{
+  "experiment": "pheromone_decay",
+  "model_type": "virtual_grid_simulation",
+  "decay_equation": "I(t) = I0 * exp(-phi * t) + I_residual",
+  "decay_constant_per_s": 0.02,
+  "residual_fraction": 0.01,
+  "time_constant_s": 50.0,
+  "half_life_s": 34.657359027997266
+}
