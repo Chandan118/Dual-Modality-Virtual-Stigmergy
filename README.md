@@ -1,4 +1,4 @@
-# FormicaBot Experimental Validation
+# Dual-Modality Virtual Stigmergy: FormicaBot Experimental Validation
 
 Chapter 6 experimental validation code for FormicaBot — a single-robot platform based on NVIDIA Jetson Orin Nano 8GB and ROS 2 Humble.
 
