@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-exp5_obstacle_fault.py — Experiment 5
-====================================
-Obstacle avoidance and sensor failure handling.
 
-Run:
-    python exp5_obstacle_fault.py
-"""
 
 import csv
 import os

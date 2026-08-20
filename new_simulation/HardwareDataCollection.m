@@ -10,7 +10,6 @@
 %   4. Virtual Pheromone Decay Model (Documents the software simulation)
 %   5. Genuine SLAM RMSE (Replaces fake 0.087 m claim)
 %
-% Author: Chandan Sheikder
 % Date: 2026-08-15
 % Platform: MATLAB 2026b
 
@@ -129,10 +128,8 @@ classdef HardwareDataCollection < handle
             %   3. Record for 60 seconds during normal operation
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('EXPERIMENT 1: POWER CONSUMPTION MEASUREMENT\n');
-            fprintf('============================================================\n');
-            fprintf('Purpose: Replace fabricated 0.669 W with genuine measurement\n');
+                        fprintf('EXPERIMENT 1: POWER CONSUMPTION MEASUREMENT\n');
+                        fprintf('Purpose: Replace fabricated 0.669 W with genuine measurement\n');
             fprintf('Hardware: INA219 sensor on battery line\n');
             fprintf('\n');
             
@@ -384,10 +381,8 @@ classdef HardwareDataCollection < handle
             %   4. Compare to ideal path
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('EXPERIMENT 2: TRAJECTORY & CROSS-TRACK ERROR\n');
-            fprintf('============================================================\n');
-            fprintf('Purpose: Replace fabricated 0.080 cm with genuine measurement\n');
+                        fprintf('EXPERIMENT 2: TRAJECTORY & CROSS-TRACK ERROR\n');
+                        fprintf('Purpose: Replace fabricated 0.080 cm with genuine measurement\n');
             fprintf('Hardware: External camera or motion capture system\n');
             fprintf('\n');
             
@@ -661,10 +656,8 @@ classdef HardwareDataCollection < handle
             %   4. Identify stabilization time
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('EXPERIMENT 3: MQ-135 SENSOR WARM-UP CURVE\n');
-            fprintf('============================================================\n');
-            fprintf('Purpose: Replace fabricated 30-second stabilization\n');
+                        fprintf('EXPERIMENT 3: MQ-135 SENSOR WARM-UP CURVE\n');
+                        fprintf('Purpose: Replace fabricated 30-second stabilization\n');
             fprintf('Hardware: MQ-135 with ADC, data logger\n');
             fprintf('\n');
             
@@ -920,10 +913,8 @@ classdef HardwareDataCollection < handle
             % mapped over the physical arena
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('EXPERIMENT 4: VIRTUAL PHEROMONE DECAY MODEL\n');
-            fprintf('============================================================\n');
-            fprintf('CORRECTION: Physical LED light does not evaporate.\n');
+                        fprintf('EXPERIMENT 4: VIRTUAL PHEROMONE DECAY MODEL\n');
+                        fprintf('CORRECTION: Physical LED light does not evaporate.\n');
             fprintf('Pheromones are SIMULATED in a software grid.\n');
             fprintf('\n');
             
@@ -1133,10 +1124,8 @@ classdef HardwareDataCollection < handle
             %   4. Calculate RMSE
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('EXPERIMENT 5: SLAM ROOT MEAN SQUARE ERROR\n');
-            fprintf('============================================================\n');
-            fprintf('Purpose: Replace fabricated 0.087 m with genuine measurement\n');
+                        fprintf('EXPERIMENT 5: SLAM ROOT MEAN SQUARE ERROR\n');
+                        fprintf('Purpose: Replace fabricated 0.087 m with genuine measurement\n');
             fprintf('Hardware: RPLIDAR + slam_toolbox + tape measure\n');
             fprintf('\n');
             
@@ -1385,10 +1374,8 @@ classdef HardwareDataCollection < handle
             % Generate comprehensive report of all experiments
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('COMPREHENSIVE EXPERIMENT REPORT\n');
-            fprintf('============================================================\n');
-            fprintf('\n');
+                        fprintf('COMPREHENSIVE EXPERIMENT REPORT\n');
+                        fprintf('\n');
             
             % Summary table
             fprintf('%-30s %-20s %-20s %-15s\n', 'Experiment', 'Metric', 'Measured Value', 'Status');

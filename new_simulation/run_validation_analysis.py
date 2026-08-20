@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""
-FormicaBot V2 Hardware Validation - Priority Review Analysis
-Addresses all 10 priority items from reviewer feedback
-"""
+
 
 import matplotlib
 matplotlib.use('Agg')  # Non-interactive backend

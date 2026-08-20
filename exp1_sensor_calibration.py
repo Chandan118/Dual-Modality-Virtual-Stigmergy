@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
-"""
-exp1_sensor_calibration.py — Experiment 1
-==========================================
-Hardware Integration and Multi-Sensor Calibration.
 
-Hardware required:
-  - RPLIDAR A1M8 on /dev/ttyUSB* (or configured serial port)
-  - MPU6050 IMU publishing /imu/data
-  - Wheel encoders publishing /odom
-  - Arduino publishing /line_sensors and /gas_sensor
-  - Azure Kinect camera publishing /rgb/image_raw
-
-Run:
-    python exp1_sensor_calibration.py
-"""
 
 import csv
 import os

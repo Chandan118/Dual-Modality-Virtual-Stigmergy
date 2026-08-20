@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-exp2_power_profiling.py — Experiment 2
-======================================
-INA219 Power Monitoring over mission duration.
 
-Run:
-    python exp2_power_profiling.py
-"""
 
 import csv
 import os

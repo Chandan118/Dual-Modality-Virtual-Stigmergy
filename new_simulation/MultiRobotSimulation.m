@@ -2,7 +2,6 @@
 % Multi-robot swarm simulation with 20 wheeled robots
 % Generates 1-minute video of robots performing foraging task
 %
-% Author: Chandan Sheikder
 % Date: 2026-08-15
 
 classdef MultiRobotSimulation
@@ -92,14 +91,11 @@ classdef MultiRobotSimulation
             % Run the main simulation loop
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('MULTI-ROBOT SWARM SIMULATION\n');
-            fprintf('============================================================\n');
-            fprintf('Number of robots: %d\n', obj.num_robots);
+                        fprintf('MULTI-ROBOT SWARM SIMULATION\n');
+                        fprintf('Number of robots: %d\n', obj.num_robots);
             fprintf('Arena size: %.1f x %.1f m\n', obj.arena_width, obj.arena_height);
             fprintf('Simulation time: %.0f seconds\n', obj.sim_time);
-            fprintf('============================================================\n');
-            
+                        
             num_steps = length(obj.time);
             
             % Create figure for animation
@@ -180,13 +176,10 @@ classdef MultiRobotSimulation
             close(fig);
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('SIMULATION COMPLETE!\n');
-            fprintf('============================================================\n');
-            fprintf('Video saved to: multi_robot_simulation.mp4\n');
+                        fprintf('SIMULATION COMPLETE!\n');
+                        fprintf('Video saved to: multi_robot_simulation.mp4\n');
             fprintf('Total tasks completed: %d\n', sum(obj.task_completed));
-            fprintf('============================================================\n');
-        end
+                    end
         
         function [sensor, grad_x, grad_y] = sensePheromone(obj, x, y)
             % Sense pheromone at position (x, y) and compute gradient

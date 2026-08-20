@@ -1,21 +1,5 @@
 #!/usr/bin/env python3
-"""
-ROS2 Multi-Robot Swarm Simulation Nodes
-20 FormicaBot wheeled robots performing foraging task
 
-Author: Chandan Sheikder
-Date: 2026-08-15
-
-USAGE:
-    # Run coordinator
-    ros2 run multi_robot_swarm coordinator
-    
-    # Run pheromone grid
-    ros2 run multi_robot_swarm pheromone_grid
-    
-    # Run robot nodes (in separate terminals or using launch file)
-    ros2 run multi_robot_swarm robot_node
-"""
 
 import rclpy
 from rclpy.node import Node

@@ -10,7 +10,6 @@
 %   To run continuously: RunHardwareValidation(true)
 %   This will collect data every 5 minutes until manually stopped
 %
-% Author: Chandan Sheikder
 % Date: 2026-08-15
 
 function RunHardwareValidation(loop_mode)
@@ -21,13 +20,10 @@ function RunHardwareValidation(loop_mode)
     addpath(genpath(pwd));
     
     fprintf('\n');
-    fprintf('============================================================\n');
-    fprintf('FORMICABOT V2 HARDWARE VALIDATION\n');
+        fprintf('FORMICABOT V2 HARDWARE VALIDATION\n');
     fprintf('Data Collection Framework\n');
-    fprintf('============================================================\n');
-    fprintf('Started: %s\n', datestr(now));
-    fprintf('============================================================\n');
-    
+        fprintf('Started: %s\n', datestr(now));
+        
     % Initialize data collector
     dataCollector = HardwareDataCollection();
     
@@ -194,10 +190,8 @@ function RunHardwareValidation(loop_mode)
     
     % Print correction summary
     fprintf('\n');
-    fprintf('============================================================\n');
-    fprintf('CORRECTED MANUSCRIPT DATA SUMMARY\n');
-    fprintf('============================================================\n');
-    fprintf('\n');
+        fprintf('CORRECTED MANUSCRIPT DATA SUMMARY\n');
+        fprintf('\n');
     
     fprintf('Item 1: Power Consumption\n');
     fprintf('  Fabricated: %.3f W\n', corrected_data.power_consumption.fabricated_value);
@@ -255,10 +249,8 @@ function RunHardwareValidation(loop_mode)
             
             iteration = iteration + 1;
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('LOOP ITERATION %d\n', iteration);
-            fprintf('============================================================\n');
-            
+                        fprintf('LOOP ITERATION %d\n', iteration);
+                        
             % Run hardware validation again
             hwc = HardwareDataCollection();
             hwc.runPowerConsumptionExperiment();
@@ -275,10 +267,8 @@ function RunHardwareValidation(loop_mode)
     end
     
     fprintf('\n');
-    fprintf('============================================================\n');
-    fprintf('HARDWARE VALIDATION COMPLETE\n');
-    fprintf('============================================================\n');
-    fprintf('Results saved to: hardware_data/\n');
+        fprintf('HARDWARE VALIDATION COMPLETE\n');
+        fprintf('Results saved to: hardware_data/\n');
     fprintf('\n');
     fprintf('To run again: RunHardwareValidation()\n');
     fprintf('To run in loop mode: RunHardwareValidation(true)\n');

@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
-"""
-HardwareDataCollection.py
-Comprehensive Hardware Data Collection Framework for FormicaBot V2
-Processes and validates real hardware measurements
 
-EXPERIMENTS:
-1. True Power Consumption (Replaces fake 0.669 W claim)
-2. Real Trajectory & Cross-Track Error (Replaces fake 0.080 cm claim)
-3. MQ-135 Chemical Sensor Warm-Up Curve (Replaces fake 30-second claim)
-4. Virtual Pheromone Decay Model (Documents the software simulation)
-5. Genuine SLAM RMSE (Replaces fake 0.087 m claim)
-
-Author: Chandan Sheikder
-Date: 2026-08-15
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -130,11 +116,9 @@ class HardwareDataCollection:
         self.params = self._setup_parameters()
         self.timestamp = datetime.now().isoformat()
         
-        print("=" * 80)
-        print(" "*20 + "HARDWARE DATA COLLECTION")
+                print(" "*20 + "HARDWARE DATA COLLECTION")
         print(" "*25 + "Framework Initialized")
-        print("=" * 80)
-        print(f"Results directory: {RESULTS_DIR}")
+                print(f"Results directory: {RESULTS_DIR}")
         print(f"Timestamp: {self.timestamp}")
         print()
     
@@ -192,10 +176,8 @@ class HardwareDataCollection:
             PowerConsumptionData object
         """
         print()
-        print("=" * 80)
-        print("EXPERIMENT 1: POWER CONSUMPTION MEASUREMENT")
-        print("=" * 80)
-        print("Purpose: Replace fabricated 0.669 W with genuine measurement")
+                print("EXPERIMENT 1: POWER CONSUMPTION MEASUREMENT")
+                print("Purpose: Replace fabricated 0.669 W with genuine measurement")
         print("Hardware: INA219 sensor on battery line")
         print()
         
@@ -475,10 +457,8 @@ STATUS: PHYSICALLY IMPOSSIBLE
             TrajectoryData object
         """
         print()
-        print("=" * 80)
-        print("EXPERIMENT 2: TRAJECTORY & CROSS-TRACK ERROR")
-        print("=" * 80)
-        print("Purpose: Replace fabricated 0.080 cm with genuine measurement")
+                print("EXPERIMENT 2: TRAJECTORY & CROSS-TRACK ERROR")
+                print("Purpose: Replace fabricated 0.080 cm with genuine measurement")
         print("Hardware: External camera or motion capture system")
         print()
         
@@ -724,10 +704,8 @@ STATUS: PHYSICALLY IMPOSSIBLE
             MQ135WarmupData object
         """
         print()
-        print("=" * 80)
-        print("EXPERIMENT 3: MQ-135 SENSOR WARM-UP CURVE")
-        print("=" * 80)
-        print("Purpose: Replace fabricated 30-second stabilization")
+                print("EXPERIMENT 3: MQ-135 SENSOR WARM-UP CURVE")
+                print("Purpose: Replace fabricated 30-second stabilization")
         print("Hardware: MQ-135 with ADC, data logger")
         print()
         
@@ -975,10 +953,8 @@ time of at least {m.stabilization_time * 1.2:.0f} seconds
         Pheromones are SIMULATED in a software grid
         """
         print()
-        print("=" * 80)
-        print("EXPERIMENT 4: VIRTUAL PHEROMONE DECAY MODEL")
-        print("=" * 80)
-        print("CORRECTION: Physical LED light does not evaporate")
+                print("EXPERIMENT 4: VIRTUAL PHEROMONE DECAY MODEL")
+                print("CORRECTION: Physical LED light does not evaporate")
         print("Pheromones are SIMULATED in a software grid")
         print()
         
@@ -1189,10 +1165,8 @@ time of at least {m.stabilization_time * 1.2:.0f} seconds
             SLAMRMSEData object
         """
         print()
-        print("=" * 80)
-        print("EXPERIMENT 5: SLAM ROOT MEAN SQUARE ERROR")
-        print("=" * 80)
-        print("Purpose: Replace fabricated 0.087 m with genuine measurement")
+                print("EXPERIMENT 5: SLAM ROOT MEAN SQUARE ERROR")
+                print("Purpose: Replace fabricated 0.087 m with genuine measurement")
         print("Hardware: RPLIDAR + slam_toolbox + tape measure")
         print()
         
@@ -1428,10 +1402,8 @@ Fabricated Value: 8.7 cm
     def generate_comprehensive_report(self):
         """Generate comprehensive report of all experiments"""
         print()
-        print("=" * 80)
-        print("COMPREHENSIVE EXPERIMENT REPORT")
-        print("=" * 80)
-        print()
+                print("COMPREHENSIVE EXPERIMENT REPORT")
+                print()
         
         # Summary table
         print(f"{'Experiment':<30} {'Metric':<20} {'Value':<20} {'Status':<15}")

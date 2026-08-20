@@ -4,7 +4,6 @@
 # Usage:
 #   ros2 launch multi_robot_swarm swarm_simulation.launch.py
 #
-# Author: Chandan Sheikder
 # Date: 2026-08-15
 
 from launch import LaunchDescription

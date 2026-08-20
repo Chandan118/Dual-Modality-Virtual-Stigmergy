@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""
-Generate Professional Figure - Dual-Modality Navigation System Analysis
-White background for publication - Improved version
-Using actual MATLAB simulation data
-"""
+
 
 import numpy as np
 import matplotlib.pyplot as plt

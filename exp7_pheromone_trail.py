@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-exp7_pheromone_trail.py — Experiment 7
-========================================
-LED trail following with ethanol detection (MQ-3 sensor).
 
-Run:
-    python exp7_pheromone_trail.py
-"""
 
 import csv
 import os

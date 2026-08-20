@@ -5,7 +5,6 @@
 % Robot specs from: https://www.unitree.com/opensource
 % URDF: unitree_go2.urdf
 %
-% Author: Chandan Sheikder
 % Date: 2026-08-15
 
 classdef UnitreeGo2Simulation
@@ -65,14 +64,11 @@ classdef UnitreeGo2Simulation
         function obj = initializeRobots(obj)
             % Initialize robot positions randomly in arena
             
-            fprintf('============================================================\n');
-            fprintf('UNITREE GO2 MULTI-ROBOT SIMULATION\n');
-            fprintf('============================================================\n');
-            fprintf('Robot Model: Unitree Go2\n');
+                        fprintf('UNITREE GO2 MULTI-ROBOT SIMULATION\n');
+                        fprintf('Robot Model: Unitree Go2\n');
             fprintf('Source: https://www.unitree.com/opensource\n');
             fprintf('URDF: unitree_go2.urdf\n');
-            fprintf('============================================================\n');
-            fprintf('Initializing %d Unitree Go2 robots...\n', obj.num_robots);
+                        fprintf('Initializing %d Unitree Go2 robots...\n', obj.num_robots);
             
             % Initialize positions
             for i = 1:obj.num_robots
@@ -123,14 +119,11 @@ classdef UnitreeGo2Simulation
             % Run the main simulation loop
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('SIMULATION STARTED\n');
-            fprintf('============================================================\n');
-            fprintf('Number of robots: %d\n', obj.num_robots);
+                        fprintf('SIMULATION STARTED\n');
+                        fprintf('Number of robots: %d\n', obj.num_robots);
             fprintf('Arena size: %.1f x %.1f m\n', obj.arena_width, obj.arena_height);
             fprintf('Simulation time: %.0f seconds\n', obj.sim_time);
-            fprintf('============================================================\n');
-            
+                        
             num_steps = length(obj.time);
             
             % Create figure for animation
@@ -221,13 +214,10 @@ classdef UnitreeGo2Simulation
             close(fig);
             
             fprintf('\n');
-            fprintf('============================================================\n');
-            fprintf('SIMULATION COMPLETE!\n');
-            fprintf('============================================================\n');
-            fprintf('Video saved to: unitree_go2_simulation.mp4\n');
+                        fprintf('SIMULATION COMPLETE!\n');
+                        fprintf('Video saved to: unitree_go2_simulation.mp4\n');
             fprintf('Robot Model: Unitree Go2\n');
-            fprintf('============================================================\n');
-        end
+                    end
         
         function obj = updateQuadrupedGait(obj, robot_idx, step, theta, phase)
             % Update joint angles for quadruped walking gait

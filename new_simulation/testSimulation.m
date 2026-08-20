@@ -4,11 +4,8 @@ function testSimulation()
 % This script tests each component of the simulation to ensure they work
 % correctly before running the full simulation.
 %
-% Author: Chandan Sheikder
-% Platform: MacBook M2 Pro, MATLAB 2026b
 
-    fprintf('=============================================================\n');
-    fprintf('Testing Real-Space Pheromone Simulation Components\n');
+        fprintf('Testing Real-Space Pheromone Simulation Components\n');
     fprintf('=============================================================\n\n');
 
     %% Test 1: Realistic Floor
@@ -211,15 +208,12 @@ function testSimulation()
     end
 
     %% Summary
-    fprintf('=============================================================\n');
-    fprintf('Component Test Summary\n');
-    fprintf('=============================================================\n');
-    fprintf('All core components have been tested.\n');
+        fprintf('Component Test Summary\n');
+        fprintf('All core components have been tested.\n');
     fprintf('Ready to run full simulation.\n');
     fprintf('\n');
     fprintf('To run the full simulation, execute:\n');
     fprintf('  RealSpace_Pheromone_Simulation\n');
     fprintf('\n');
-    fprintf('=============================================================\n');
-
+    
 end

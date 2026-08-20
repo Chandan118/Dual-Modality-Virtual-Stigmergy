@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-exp4_maze_navigation.py — Experiment 4
-======================================
-Nav2 autonomous navigation in known map.
 
-Run:
-    python exp4_maze_navigation.py
-"""
 
 import csv
 import os

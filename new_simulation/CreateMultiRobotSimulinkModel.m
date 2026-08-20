@@ -1,15 +1,12 @@
 %% CreateMultiRobotSimulinkModel.m
 % Programmatically create Simulink model for 20-robot swarm simulation
 %
-% Author: Chandan Sheikder
 % Date: 2026-08-15
 
 function CreateMultiRobotSimulinkModel()
     fprintf('\n');
-    fprintf('============================================================\n');
-    fprintf('CREATING MULTI-ROBOT SIMULINK MODEL\n');
-    fprintf('============================================================\n');
-    
+        fprintf('CREATING MULTI-ROBOT SIMULINK MODEL\n');
+        
     % Model name
     modelName = 'MultiRobotSwarmSimulink';
     
@@ -110,10 +107,8 @@ function CreateMultiRobotSimulinkModel()
     createModelDocumentation(modelName, numRobots);
     
     fprintf('\n');
-    fprintf('============================================================\n');
-    fprintf('SIMULINK MODEL CREATED!\n');
-    fprintf('============================================================\n');
-    fprintf('Model: %s.slx\n', modelName);
+        fprintf('SIMULINK MODEL CREATED!\n');
+        fprintf('Model: %s.slx\n', modelName);
     fprintf('Robots: %d (expandable to 20)\n', numRobots);
     fprintf('Simulation time: 60 seconds\n');
     fprintf('\n');
@@ -132,8 +127,7 @@ function CreateMultiRobotSimulinkModel()
     fprintf('\n');
     fprintf('TO RUN:\n');
     fprintf('  sim(''%s'')\n', modelName);
-    fprintf('============================================================\n');
-end
+    end
 
 function createModelDocumentation(modelName, numRobots)
     fid = fopen([modelName, '_README.txt'], 'w');

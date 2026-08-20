@@ -1,18 +1,10 @@
 %% Real-Space Optical Pheromone Exchange Simulation
 % Main script to run the comprehensive simulation comparing
 % Real-Space (realistic) vs Ideal sensory models
-%
-% Author: Chandan Sheikder
-% Platform: MacBook M2 Pro, MATLAB 2026b
-% Description: Simulates realistic optical pheromone exchange for swarm robotics
-
-clear all;
 close all;
 clc;
 
-fprintf('=============================================================\n');
 fprintf('Real-Space Optical Pheromone Exchange Simulation\n');
-fprintf('=============================================================\n');
 fprintf('Platform: MacBook M2 Pro | MATLAB 2026b\n');
 fprintf('Date: %s\n', datestr(now));
 fprintf('=============================================================\n\n');
@@ -79,7 +71,6 @@ comparator = PerformanceComparator(params);
 fprintf('\n');
 
 %% Run Simulation
-fprintf('=============================================================\n');
 fprintf('Starting Simulation...\n');
 fprintf('=============================================================\n\n');
 
@@ -112,9 +103,7 @@ end
 fprintf('\n');
 
 %% Performance Comparison
-fprintf('=============================================================\n');
 fprintf('Performance Comparison Summary\n');
-fprintf('=============================================================\n');
 comparator = comparator.compare(resultsIdeal, resultsReal);
 comparator.printSummary();
 fprintf('\n');
@@ -131,9 +120,7 @@ saveResults(params, resultsIdeal, resultsReal, simData);
 fprintf('  - Results saved to ./results/\n');
 fprintf('\n');
 
-fprintf('=============================================================\n');
 fprintf('Simulation Complete!\n');
-fprintf('=============================================================\n');
 
 %% Nested Functions
 

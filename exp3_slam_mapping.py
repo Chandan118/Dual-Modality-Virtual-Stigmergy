@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-exp3_slam_mapping.py — Experiment 3
-===================================
-Online SLAM with landmark detection.
 
-Run:
-    python exp3_slam_mapping.py
-"""
 
 import csv
 import os

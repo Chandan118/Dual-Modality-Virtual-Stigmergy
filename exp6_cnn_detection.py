@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-exp6_cnn_detection.py — Experiment 6
-=====================================
-TensorRT-based target recognition.
 
-Run:
-    python exp6_cnn_detection.py
-"""
 
 import csv
 import os

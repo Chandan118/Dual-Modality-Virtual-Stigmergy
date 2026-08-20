@@ -313,10 +313,8 @@ function createCustomBlocks()
     fclose(fid);
     fprintf('   Created: addCustomBlocksToModel.m\n\n');
 
-    fprintf('=============================================================\n');
-    fprintf('Custom S-Function blocks created successfully!\n');
-    fprintf('=============================================================\n');
-    fprintf('\n');
+        fprintf('Custom S-Function blocks created successfully!\n');
+        fprintf('\n');
     fprintf('To compile the S-Functions, run:\n');
     fprintf('  mex msfcn_floor.m\n');
     fprintf('  mex msfcn_tcrt5000.m\n');

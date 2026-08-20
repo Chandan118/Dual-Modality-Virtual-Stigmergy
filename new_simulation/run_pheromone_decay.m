@@ -5,9 +5,7 @@ hwc = HardwareDataCollection();
 hwc.documentPheromoneDecayModel();
 
 fprintf('\n');
-fprintf('============================================================\n');
 fprintf('PHEROMONE DECAY EXPERIMENT RESULTS\n');
-fprintf('============================================================\n');
 fprintf('\n');
 fprintf('KEY PARAMETERS:\n');
 fprintf('  Decay rate (phi): %.4f per second\n', hwc.pheromone_decay_data.decay_rate);
@@ -60,4 +58,3 @@ fprintf('  This is a VIRTUAL pheromone model - a software simulation.\n');
 fprintf('  Physical LEDs do NOT evaporate. The pheromone is stored as\n');
 fprintf('  intensity values in a 2D grid and decays mathematically.\n');
 fprintf('\n');
-fprintf('============================================================\n');

@@ -7,11 +7,8 @@ function createSimulinkModel()
 %
 % Usage: Run this script in MATLAB to create and open the model
 %
-% Author: Chandan Sheikder
-% Platform: MacBook M2 Pro, MATLAB 2026b
 
-    fprintf('=============================================================\n');
-    fprintf('Creating Simulink Model for Real-Space Pheromone Simulation\n');
+        fprintf('Creating Simulink Model for Real-Space Pheromone Simulation\n');
     fprintf('=============================================================\n\n');
 
     % Model name
@@ -255,8 +252,7 @@ function createSimulinkModel()
     fprintf('To generate custom S-Functions for detailed physics,\n');
     fprintf('  run: createCustomBlocks() after opening the model.\n');
     fprintf('\n');
-    fprintf('=============================================================\n');
-
+    
     % Open the model
     open_system(modelName);
 end
